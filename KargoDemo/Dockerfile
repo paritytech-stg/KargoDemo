@@ -1,4 +1,4 @@
-﻿﻿FROM nginx AS base
+﻿FROM nginx AS base
 EXPOSE 80
 EXPOSE 443
 
