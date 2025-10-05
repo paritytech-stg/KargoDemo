@@ -26,7 +26,7 @@ jobs:
       - name: Build and push KargoDemoServer image
         uses: docker/build-push-action@v5
         with:
-          context: ./KargoDemoServer
+          context: .
           file: ./KargoDemoServer/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/kargodemoserver:${{ github.sha }}
@@ -34,7 +34,7 @@ jobs:
       - name: Build and push KargoDemo image
         uses: docker/build-push-action@v5
         with:
-          context: ./KargoDemo
+          context: .
           file: ./KargoDemo/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/kargodemo:${{ github.sha }}
