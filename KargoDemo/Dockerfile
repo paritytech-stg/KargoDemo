@@ -2,7 +2,7 @@
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["KargoDemo/KargoDemo.csproj", "KargoDemo/"]
@@ -18,4 +18,4 @@ RUN dotnet publish "./KargoDemo.csproj" -c $BUILD_CONFIGURATION -o /app/publish 
 FROM  base AS final
 WORKDIR /usr/share/nginx/html
 COPY --from=publish /app/publish/wwwroot .
-COPY  CodePruner.Examples.BlazorWasm.Containerization/nginx.conf /etc/nginx/nginx.conf
+COPY  KargoDemo/nginx.conf /etc/nginx/nginx.conf
