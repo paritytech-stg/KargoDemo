@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KargoDemo", "KargoDemo\KargoDemo.csproj", "{3EC69E63-0EA3-4B15-8FE8-76C53E945103}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KargoDemoServer", "KargoDemoServer\KargoDemoServer.csproj", "{BBF37551-C38E-4845-83C3-12A032D1AB98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EC69E63-0EA3-4B15-8FE8-76C53E945103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EC69E63-0EA3-4B15-8FE8-76C53E945103}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EC69E63-0EA3-4B15-8FE8-76C53E945103}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EC69E63-0EA3-4B15-8FE8-76C53E945103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBF37551-C38E-4845-83C3-12A032D1AB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF37551-C38E-4845-83C3-12A032D1AB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF37551-C38E-4845-83C3-12A032D1AB98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF37551-C38E-4845-83C3-12A032D1AB98}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C2021F0-243D-414C-A393-7F8F0EC1C588}
+	EndGlobalSection
+EndGlobal
