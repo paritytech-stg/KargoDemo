@@ -34,6 +34,8 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/kargodemoserver:${{ github.sha }}
             ghcr.io/${{ github.repository_owner }}/kargodemoserver:latest
 
+      - name: Sleep
+        run: sleep 2m
 
       - name: Build and push KargoDemo image
         uses: docker/build-push-action@v5
