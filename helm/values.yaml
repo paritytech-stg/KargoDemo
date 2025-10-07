@@ -3,10 +3,10 @@ replicaCount: 1
 frontend:
   image:
     registry: ghcr.io
-    repository: ghcr.io/paritytech-stg/kargodemoserver
+    repository: paritytech-stg/kargodemo
     tag: 55afe0c79efd99d015b045c87d7d35c453cea0e1
 backend:
   image:
     registry: ghcr.io
-    repository: ghcr.io/paritytech-stg/kargodemoserver
+    repository: paritytech-stg/kargodemoserver
     tag: 55afe0c79efd99d015b045c87d7d35c453cea0e1
