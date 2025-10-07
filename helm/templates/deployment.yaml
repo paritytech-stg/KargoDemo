@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: kargodemo
-          image: {{ .values.frontend.image.registry | default "ghcr.io" }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}
+          image: {{ .Values.frontend.image.registry | default "ghcr.io" }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}
           ports:
             - containerPort: 80
         - name: kargodemoserver
-          image: {{ .values.backend.image.registry | default "ghcr.io" }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}
+          image: {{ .Values.backend.image.registry | default "ghcr.io" }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}
           ports:
             - containerPort: 5000
