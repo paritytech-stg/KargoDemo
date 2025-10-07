@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kargodemo
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: kargodemo.andwehaveaplan.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: kargodemo
+                port:
+                  number: 5000        
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kargodemo
+                port:
+                  number: 80

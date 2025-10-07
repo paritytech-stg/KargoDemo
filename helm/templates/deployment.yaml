@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kargodemo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kargodemo
+  template:
+    metadata:
+      labels:
+        app: kargodemo
+    spec:
+      containers:
+        - name: kargodemo
+          image: {{ .values.frontend.image.registry }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}
+          ports:
+            - containerPort: 80
+        - name: kargodemoserver
+          image: {{ .values.backend.image.registry }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}
+          ports:
+            - containerPort: 5000
