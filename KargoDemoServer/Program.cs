@@ -28,6 +28,7 @@ namespace KargoDemoServer
             app.UseAuthorization();
 
             app.UseCors("AllowAllPolicy");
+            app.UsePathBase(new PathString("/api"));
 
             app.MapControllers();
 
