@@ -55,9 +55,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Compute short SHA
-        run: echo "SHORT_SHA=${GITHUB_SHA::12}" >> $GITHUB_ENV
+      - name: set lower case owner name
+        id: set-lower
+        run: |
+          echo "OWNER_LC=${OWNER,,}" >>${GITHUB_OUTPUT}
+          echo "REPOSITORY_LC=${REPOSITORY,,}" >>${GITHUB_OUTPUT}
+        env:
+          OWNER: '${{ github.repository_owner }}'
+          REPOSITORY: '${{ github.event.repository.name }}'
 
       - name: Build and push image
         uses: docker/build-push-action@v5
@@ -65,4 +70,4 @@ jobs:
           context: ${{ matrix.image.context || '.' }}
           file: ${{ matrix.image.dockerfile }}
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}-${{ matrix.image.name }}:${{ github.sha }}
+          tags: ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:${{ github.sha }}
