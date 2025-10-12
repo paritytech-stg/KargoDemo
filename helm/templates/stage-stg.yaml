@@ -16,8 +16,7 @@ spec:
 {{- if .Values.images }}
 {{- range $name, $img := .Values.images }}
                         - key: images.{{ $name }}.imageFrom
-                          value: ${{ imageFrom("{{ $.Values.registry }}/{{ $img.image }}").RepoURL }}:${{
-                            imageFrom("{{ $.Values.registry }}/{{ $img.image }}").Tag }}
+                          value: {{ "${{" }} imageFrom("{{ $.Values.registry }}/{{ $img.image }}").RepoURL {{ "}}" }}:{{ "${{" }}imageFrom("{{ $.Values.registry }}/{{ $img.image }}").Tag {{ "}}" }}
 {{- end }}
 {{- end }}
           continueOnError: false
