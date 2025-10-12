@@ -28,7 +28,7 @@ jobs:
         id: extract
         run: |
           # produce a JSON array of objects {name, dockerfile, context, repository}
-          images_json=$(yq -o=json '.images // {} | to_entries | map({name: .key, dockerfile: .value.dockerfile, context: .value.context, repository: .value.repository})' values.yaml)
+          images_json=$(yq -o=json '.images // {} | to_entries | map({"name": .key, "dockerfile": .value.dockerfile, "context": .value.context, "repository": .value.repository})' values.yaml)
           echo "images=$images_json" >> $GITHUB_OUTPUT
 
   build-and-push:
