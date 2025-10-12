@@ -70,4 +70,6 @@ jobs:
           context: ${{ matrix.image.context || '.' }}
           file: ${{ matrix.image.dockerfile }}
           push: true
-          tags: ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:${{ github.sha }}
+          tags: |
+            ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:${{ github.sha }}
+            ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:latest
