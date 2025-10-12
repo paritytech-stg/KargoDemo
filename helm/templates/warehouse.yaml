@@ -12,7 +12,7 @@ spec:
         constraint: latest
         discoveryLimit: 20
         imageSelectionStrategy: Digest
-        repoURL: {{ $.Values.registry }}/{{ $img.image }}
+        repoURL: {{ $.Values.registry }}/{{ $name }}
         strictSemvers: true
 {{- end }}
 {{- end }}
