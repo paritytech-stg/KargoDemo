@@ -1,0 +1,10 @@
+images:
+  frontend:
+    dockerfile: KargoDemo/Dockerfile
+    context: .
+    port: 80
+  backend:
+    dockerfile: KargoDemoServer/Dockerfile
+    context: .
+    port: 5000
+    ingressRoute: /api

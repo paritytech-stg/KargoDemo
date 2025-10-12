@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kargodemo
+  name: {{ .Release.Name }}
 spec:
   type: ClusterIP
   selector:
-    app: kargodemo
+    app: {{ .Release.Name }}
   ports:
-    - name: http-backend
+{{- if .Values.images }}
+{{- range $name, $img := .Values.images }}
+    - name: {{ printf "http-%s" $name }}
       protocol: TCP
-      port: 5000
-      targetPort: 5000
-    - name: http-frontend
-      protocol: TCP
-      port: 80
-      targetPort: 80
+      port: {{ $img.port }}
+      targetPort: {{ $img.port }}
+{{- end }}
+{{- end }}

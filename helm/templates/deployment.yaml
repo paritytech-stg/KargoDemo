@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kargodemo
+  name: {{ .Release.Name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount | default 1 }}
   selector:
     matchLabels:
-      app: kargodemo
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: kargodemo
+        app: {{ .Release.Name }}
     spec:
       containers:
-        - name: kargodemo
-          image: {{ .Values.frontend.image.registry | default "ghcr.io" }}/{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}
+{{- if .Values.images }}
+{{- range $name, $img := .Values.images }}
+        - name: {{ $name }}
+          image: {{ $img.image }}
           ports:
-            - containerPort: 80
-        - name: kargodemoserver
-          image: {{ .Values.backend.image.registry | default "ghcr.io" }}/{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}
-          ports:
-            - containerPort: 5000
+            - containerPort: {{ $img.port | default 80 }}
+{{- end }}
+{{- end }}

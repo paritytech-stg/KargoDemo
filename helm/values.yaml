@@ -1,12 +1,16 @@
-# Default values for kargodemo.
-replicaCount: 1
-frontend:
-  image:
-    registry: ghcr.io
-    repository: paritytech-stg/kargodemo
-    tag: 55afe0c79efd99d015b045c87d7d35c453cea0e1
-backend:
-  image:
-    registry: ghcr.io
-    repository: paritytech-stg/kargodemoserver
-    tag: 55afe0c79efd99d015b045c87d7d35c453cea0e1
+
+registry: ghcr.io
+
+images:
+  #frontend:
+  #  dockerfile: KargoDemo/Dockerfile
+  #  context: .
+  #  port: 80
+  #  ingressRoute: /
+  #  image: ghcr.io/paritytech-stg/kargodemo:latest
+  #backend:
+  #  dockerfile: KargoDemoServer/Dockerfile
+  #  context: .
+  #  port: 5000
+  #  ingressRoute: /api
+  #  image: ghcr.io/paritytech-stg/kargodemoserver:latest

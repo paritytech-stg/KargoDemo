@@ -1,24 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kargodemo
+  name: {{ .Release.Name }}
   annotations:
 spec:
   rules:
-    - host: kargodemo.andwehaveaplan.com
+    - host: "{{ .Release.Name }}.andwehaveaplan.com"
       http:
         paths:
-          - path: /api
+{{- if .Values.images | required ".Values.images is required." }}
+{{- range $name, $img := .Values.images }}
+          - path: {{ $img.ingressRoute | default "/" }}
             pathType: Prefix
             backend:
               service:
-                name: kargodemo
+                name: {{ $name }}
                 port:
-                  number: 5000        
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: kargodemo
-                port:
-                  number: 80
+                  number: {{ $img.port }}
+{{- end }}
+{{- end }}
