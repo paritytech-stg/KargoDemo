@@ -1,0 +1,18 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: {{ .Release.Name }}-warehouse
+spec:
+  freightCreationPolicy: Automatic
+  interval: 2m0s
+  subscriptions:
+{{- if .Values.images }}
+{{- range $name, $img := .Values.images }}
+    - image:
+        constraint: latest
+        discoveryLimit: 20
+        imageSelectionStrategy: Digest
+        repoURL: {{ .Values.registry }}/{{ $img.image }}
+        strictSemvers: true
+{{- end }}
+{{- end }}

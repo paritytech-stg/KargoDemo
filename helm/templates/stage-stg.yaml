@@ -1,0 +1,25 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: argo-stg
+spec:
+  promotionTemplate:
+    spec:
+      steps:
+        - as: argo-update
+          config:
+            apps:
+              - name: kargo-demo-1
+                sources:
+                  - helm:
+                      images:
+{{- if .Values.images }}
+{{- range $name, $img := .Values.images }}
+                        - key: images.{{ $name }}.imageFrom
+                          value: ${{ imageFrom("{{ $.Values.registry }}/{{ $img.image }}").RepoURL }}:${{
+                            imageFrom("{{ $.Values.registry }}/{{ $img.image }}").Tag }}
+{{- end }}
+{{- end }}
+          continueOnError: false
+          if: ""
+          uses: argocd-update
