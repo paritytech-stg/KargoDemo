@@ -9,7 +9,7 @@ spec:
         - as: argo-update
           config:
             apps:
-              - name: kargo-demo-1
+              - name: {{ .Release.Name }}
                 sources:
                   - helm:
                       images:
