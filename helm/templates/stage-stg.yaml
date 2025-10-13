@@ -19,6 +19,7 @@ spec:
                           value: {{ "${{" }} imageFrom("{{ $.Values.registry }}/{{ $name }}").RepoURL {{ "}}" }}:{{ "${{" }}imageFrom("{{ $.Values.registry }}/{{ $name }}").Tag {{ "}}" }}
 {{- end }}
 {{- end }}
+                    repoURL: {{ .Values.repoUrl }}
           continueOnError: false
           if: ""
           uses: argocd-update
