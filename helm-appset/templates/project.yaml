@@ -1,6 +1,10 @@
+{{- if false }}
+
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Project
 metadata:
   annotations:
     kargo.akuity.io/create-actor: admin
   name: {{ .Release.Name }}
+
+{{- if false }}

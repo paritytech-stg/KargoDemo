@@ -1,3 +1,5 @@
+{{- if false }}
+
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
 metadata:
@@ -15,4 +17,6 @@ spec:
         repoURL: {{ $.Values.registry }}/{{ $name }}
         strictSemvers: true
 {{- end }}
+{{- end }}
+
 {{- end }}
