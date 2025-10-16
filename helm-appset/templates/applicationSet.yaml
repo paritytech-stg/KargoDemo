@@ -1,5 +1,5 @@
-{{ - range $productName, $val := .Values.products }}
-
+{{- range $productName, $val := .Values.products }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
