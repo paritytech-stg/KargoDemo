@@ -38,7 +38,7 @@ spec:
     spec:
       project: {{ default "default" }}
       sources:
-      - repoURL: {{ .repoUrl }}
+      - repoURL: {{ $val.repoURL }}
         targetRevision: {{ default "HEAD" .targetRevision }}
         helm:
           releaseName: {{ default $productName .releaseName }}
@@ -50,7 +50,7 @@ spec:
             {{- toYaml . | nindent 12 }}
             {{- end }}
         path: helm
-      - repoURL: {{ .repo }}
+      - repoURL: {{ $val.repoURL }}
         targetRevision: {{ default "HEAD" .targetRevision }}
         ref: valuesRepo
       destination:
