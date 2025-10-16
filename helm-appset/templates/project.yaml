@@ -7,4 +7,4 @@ metadata:
     kargo.akuity.io/create-actor: admin
   name: {{ .Release.Name }}
 
-{{- if false }}
+{{- end }}
