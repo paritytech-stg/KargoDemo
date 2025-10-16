@@ -1,0 +1,85 @@
+{{ - range $productName, $val := .Values.products }}
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: "{{ $productName }}"
+  namespace: argo-cd
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          environment: staging
+        {{- with $val.clusterMatchExpression }}
+        matchExpressions:
+        {{- toYaml . | nindent 10 }}
+        {{- end }}   
+  - clusters:
+      selector:
+        matchLabels:
+          environment: production
+          {{- with $val.prodClusterLabel }}
+          {{- toYaml . | nindent 10 }}
+          {{- end }}
+        {{- with $val.clusterMatchExpression }}
+        matchExpressions:
+        {{- toYaml . | nindent 10 }}
+        {{- end }}
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  {{- if ne .preserveResourcesOnDeletion false }}
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  {{- end }}
+  template:
+    metadata:
+      name: "{{ $productName }}-{{ "{{" }} .name {{ "}}" }}"
+    spec:
+      project: {{ default "default" }}
+      sources:
+      - repoURL: {{ .repoUrl }}
+        targetRevision: {{ default "HEAD" .targetRevision }}
+        helm:
+          releaseName: {{ default $productName .releaseName }}
+          skipCrds: {{ default false .skipCrds }}
+          valueFiles:
+            - $valuesRepo/values.yaml
+          valuesObject: {{ $val }}
+        path: helm
+      - repoURL: {{ .repo }}
+        targetRevision: {{ default "HEAD" .targetRevision }}
+        ref: valuesRepo
+      destination:
+        name: '{{ "{{" }} .name {{ "}}" }}'
+        namespace: {{ default $productName .releaseNamespace }}
+      syncPolicy:
+        retry:
+          limit: 3
+        {{- if ne .autosync false }}
+        automated:
+          selfHeal: true
+        {{- if ne .pruneResource false }}
+          prune: true
+        {{- end }}
+        {{- end }}
+        syncOptions:
+        - CreateNamespace=true
+        - ApplyOutOfSyncOnly=true
+        {{- if ne .pruneResource false }}
+        - PruneLast=true
+        {{- end }}
+        {{- if .migration }}
+        - FailOnSharedResource=true
+        {{- end }}
+        {{- if .ignoreDifferences }}
+        - RespectIgnoreDifferences=true
+        {{- end }}
+        {{- if .serverSideApply }}
+        - ServerSideApply=true
+        {{- end }}
+        {{- if .syncOptionsReplace }}
+        - Replace=true
+        {{- end }}
+
+{{- end }}

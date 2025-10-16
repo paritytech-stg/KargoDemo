@@ -1,0 +1,4 @@
+products:
+  kargoDemo:
+    repo: https://github.com/paritytech-stg/KargoDemo
+    registry: ghcr.io/paritytech-stg/kargodemo
