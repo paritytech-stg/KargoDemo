@@ -1,4 +1,4 @@
 products:
   kargo-demo:
-    repo: https://github.com/paritytech-stg/KargoDemo
+    repoURL: https://github.com/paritytech-stg/KargoDemo
     registry: ghcr.io/paritytech-stg/kargodemo
