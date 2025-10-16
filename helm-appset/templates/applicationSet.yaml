@@ -45,7 +45,10 @@ spec:
           skipCrds: {{ default false .skipCrds }}
           valueFiles:
             - $valuesRepo/values.yaml
-          valuesObject: {{ $val }}
+          valuesObject:
+            {{- with $val }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
         path: helm
       - repoURL: {{ .repo }}
         targetRevision: {{ default "HEAD" .targetRevision }}
