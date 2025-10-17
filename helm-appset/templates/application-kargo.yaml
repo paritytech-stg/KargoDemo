@@ -17,7 +17,7 @@ spec:
           - $product/values.yaml
         valuesObject:
           productName: {{ $productName }}
-          {{- with $val }}
+          {{- with $values }}
           {{- toYaml . | nindent 12 }}
           {{- end }}
       path: helm-kargo
