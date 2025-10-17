@@ -1,7 +1,9 @@
+{{- range $productName, $values := .Values.products }}
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Release.Name }}-kargo-project
+  name: {{ $productName }}-kargo-project
   namespace: argocd
 spec:
   destination:
@@ -19,3 +21,4 @@ spec:
     - repoURL: {{ $values.repoURL }}
       targetRevision: HEAD
       ref: product
+{{- end }}
