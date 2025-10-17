@@ -8,6 +8,8 @@ metadata:
 spec:
   generators:
   - clusters:
+      values:
+        environment: staging
       selector:
         matchLabels:
           environment: staging
@@ -16,6 +18,8 @@ spec:
         {{- toYaml . | nindent 10 }}
         {{- end }}   
   - clusters:
+      values:
+        environment: production
       selector:
         matchLabels:
           environment: production
@@ -34,7 +38,7 @@ spec:
   {{- end }}
   template:
     metadata:
-      name: "{{ $productName }}-{{ "{{" }} .metadata.labels.environment {{ "}}" }}"
+      name: "{{ $productName }}-{{ "{{" }} .values.environment {{ "}}" }}"
     spec:
       project: {{ default "default" }}
       sources:
@@ -55,7 +59,7 @@ spec:
         ref: valuesRepo
       destination:
         name: '{{ "{{" }} .name {{ "}}" }}'
-        namespace: {{ default $productName .releaseNamespace }}-{{ "{{" }} .metadata.labels.environment {{ "}}" }}
+        namespace: {{ default $productName .releaseNamespace }}-{{ "{{" }} .values.environment {{ "}}" }}
       syncPolicy:
         retry:
           limit: 3
