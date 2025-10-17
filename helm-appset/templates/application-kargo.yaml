@@ -27,6 +27,8 @@ spec:
       targetRevision: HEAD
       ref: product
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true    
     managedNamespaceMetadata:
       labels:
         kargo.akuity.io/project: 'true'
