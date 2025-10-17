@@ -18,7 +18,7 @@ spec:
         valuesObject:
           productName: {{ $productName }}
           {{- with $values }}
-          {{- toYaml . | nindent 12 }}
+          {{- toYaml . | nindent 10 }}
           {{- end }}
       path: helm-kargo
       repoURL: https://github.com/paritytech-stg/KargoDemo
