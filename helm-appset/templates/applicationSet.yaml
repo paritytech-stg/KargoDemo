@@ -38,7 +38,7 @@ spec:
   {{- end }}
   template:
     metadata:
-      name: "{{ $productName }}-{{ "{{" }} .values.environment {{ "}}" }}"
+      name: {{ $productName }}-{{ "{{" }} .values.environment {{ "}}" }}
     spec:
       project: {{ default "default" }}
       sources:
@@ -76,9 +76,6 @@ spec:
         managedNamespaceMetadata:
           labels:
             kargo.akuity.io/project: 'true'
-        {{- if ne .pruneResource false }}
-        - PruneLast=true
-        {{- end }}
         {{- if .migration }}
         - FailOnSharedResource=true
         {{- end }}
