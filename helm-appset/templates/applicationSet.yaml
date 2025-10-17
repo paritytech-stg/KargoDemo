@@ -39,6 +39,8 @@ spec:
   template:
     metadata:
       name: {{ $productName }}-{{ "{{" }} .values.environment {{ "}}" }}
+      annotations:
+        kargo.akuity.io/authorized-stage: {{ $productName }}-{{ "{{" }} .values.environment {{ "}}" }}
     spec:
       project: {{ default "default" }}
       sources:
