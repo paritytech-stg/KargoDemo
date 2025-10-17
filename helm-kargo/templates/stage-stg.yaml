@@ -9,7 +9,7 @@ spec:
         - as: argo-update
           config:
             apps:
-              - name: {{ .Release.Name }}-staging
+              - name: {{ .Values.productName }}-staging
                 sources:
                   - helm:
                       images:
