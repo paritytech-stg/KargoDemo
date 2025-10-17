@@ -55,7 +55,7 @@ spec:
         ref: valuesRepo
       destination:
         name: '{{ "{{" }} .name {{ "}}" }}'
-        namespace: {{ default $productName .releaseNamespace }}
+        namespace: {{ default $productName .releaseNamespace }}-{{ "{{" }} .name {{ "}}" }}
       syncPolicy:
         retry:
           limit: 3
