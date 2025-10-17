@@ -26,4 +26,8 @@ spec:
     - repoURL: {{ $values.repoURL }}
       targetRevision: HEAD
       ref: product
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        kargo.akuity.io/project: 'true'
 {{- end }}

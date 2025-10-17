@@ -74,9 +74,6 @@ spec:
         syncOptions:
         - CreateNamespace=true
         - ApplyOutOfSyncOnly=true
-        managedNamespaceMetadata:
-          labels:
-            kargo.akuity.io/project: 'true'
         {{- if .migration }}
         - FailOnSharedResource=true
         {{- end }}
