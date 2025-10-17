@@ -1,18 +1,18 @@
-{{- if false }}
-
+{{- range $productName, $val := .Values.products }}
+---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
 metadata:
-  name: {{ .Release.Name }}-warehouse
+  name: {{ $productName }}
 spec:
   freightCreationPolicy: Automatic
-  interval: 2m0s
+  interval: 1m0s
   subscriptions:
 {{- if .Values.images }}
 {{- range $name, $img := .Values.images }}
     - image:
         constraint: latest
-        discoveryLimit: 20
+        discoveryLimit: 3
         imageSelectionStrategy: Digest
         repoURL: {{ $.Values.registry }}/{{ $name }}
         strictSemvers: true

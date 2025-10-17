@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Release.Name }}-kargo-project
+  namespace: argocd
+spec:
+  destination:
+    namespace: kargo-demo-3
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+    - helm:
+        valueFiles:
+          - values.yaml
+          - $product/values.yaml
+      path: helm-kargo
+      repoURL: https://github.com/paritytech-stg/KargoDemo
+      targetRevision: HEAD
+    - repoURL: {{ $values.repoURL }}
+      targetRevision: HEAD
+      ref: product

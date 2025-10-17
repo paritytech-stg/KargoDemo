@@ -1,5 +1,5 @@
-{{- if false }}
-
+{{- range $productName, $val := .Values.products }}
+---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
@@ -11,7 +11,7 @@ spec:
         - as: argo-update
           config:
             apps:
-              - name: {{ .Release.Name }}
+              - name: {{ .Release.Name }}-staging
                 sources:
                   - helm:
                       images:
@@ -28,7 +28,7 @@ spec:
   requestedFreight:
     - origin:
         kind: Warehouse
-        name: {{ .Release.Name }}-warehouse
+        name: {{ .Release.Name }}
       sources:
         direct: true
         stages: []
