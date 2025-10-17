@@ -50,6 +50,7 @@ spec:
           valueFiles:
             - $valuesRepo/values.yaml
           valuesObject:
+            productName: {{ $productName }}
             {{- with $val }}
             {{- toYaml . | nindent 12 }}
             {{- end }}

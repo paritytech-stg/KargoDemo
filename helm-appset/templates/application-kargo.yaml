@@ -7,7 +7,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: kargo-demo-3
+    namespace: {{ $productName }}
     server: https://kubernetes.default.svc
   project: default
   sources:

@@ -1,9 +1,7 @@
-{{- range $productName, $val := .Values.products }}
----
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
 metadata:
-  name: {{ $productName }}
+  name: {{ .Values.productName }}
 spec:
   freightCreationPolicy: Automatic
   interval: 1m0s
@@ -17,6 +15,4 @@ spec:
         repoURL: {{ $.Values.registry }}/{{ $name }}
         strictSemvers: true
 {{- end }}
-{{- end }}
-
 {{- end }}
