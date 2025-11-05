@@ -1,6 +1,6 @@
 
 registry: ""
-
+hostname: ""
 images:
   #frontend:
   #  dockerfile: KargoDemo/Dockerfile

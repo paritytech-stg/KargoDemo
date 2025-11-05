@@ -30,6 +30,12 @@ spec:
         matchExpressions:
         {{- toYaml . | nindent 10 }}
         {{- end }}
+  ignoreApplicationDifferences:
+  - jqPathExpressions:
+    - .spec.source.helm.parameters
+    - .spec.source.helm.values
+    - .spec.sources[] | .helm.parameters
+    - .spec.sources[] | .helm.values        
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   {{- if ne .preserveResourcesOnDeletion false }}
