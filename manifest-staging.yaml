@@ -1,10 +1,6 @@
 images:
-  frontend:
-    dockerfile: KargoDemo/Dockerfile
-    context: .
-    port: 80
   backend:
-    dockerfile: KargoDemoServer/Dockerfile
-    context: .
-    port: 5000
-    ingressRoute: /api
+    env:
+      SOME_VAR: staging_value
+      SOME_SECRET_VAR: secret:important-secret
+      SOME_SECRET_VAR_2: secret:other-secret
