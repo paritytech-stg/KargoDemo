@@ -4,3 +4,4 @@ images:
       SOME_VAR: staging_value
       SOME_SECRET_VAR: secret:important-secret
       SOME_SECRET_VAR_2: secret:other-secret
+      SOME_SECRET_VAR_3: ref+vault://kv/argo-cd/products/kargo-demo#important-secret
