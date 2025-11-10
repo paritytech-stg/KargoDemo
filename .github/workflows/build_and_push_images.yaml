@@ -24,11 +24,11 @@ jobs:
           sudo chmod +x /usr/local/bin/yq
           yq --version
 
-      - name: Extract images from values.yaml
+      - name: Extract images from manifest.yaml
         id: extract
         run: |
           # produce a JSON array of objects {name, dockerfile, context, repository}
-          images_json=$(yq -o=json -I=0 '.images // {} | to_entries | map({"name": .key, "dockerfile": .value.dockerfile, "context": .value.context, "repository": .value.repository})' values.yaml)
+          images_json=$(yq -o=json -I=0 '.images // {} | to_entries | map({"name": .key, "dockerfile": .value.dockerfile, "context": .value.context, "repository": .value.repository})' manifest.yaml)
           echo "images=${images_json}" >> $GITHUB_OUTPUT
 
   build-and-push:
@@ -64,6 +64,11 @@ jobs:
           OWNER: '${{ github.repository_owner }}'
           REPOSITORY: '${{ github.event.repository.name }}'
 
+      - name: Generate date tag
+        id: date-tag
+        run: |
+          echo "DATE_TAG=$(date -u +'%Y%m%d%H%M%S')" >> ${GITHUB_OUTPUT}
+
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
@@ -72,4 +77,5 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:${{ github.sha }}
+            ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:${{ steps.date-tag.outputs.DATE_TAG }}
             ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:latest
