@@ -67,7 +67,7 @@ jobs:
       - name: Generate vars
         id: date-tag
         run: |
-          echo "DATE_TAG=$(date -u +'%Y%m%d%-H%M%S')" >> ${GITHUB_OUTPUT}
+          echo "DATE_TAG=$(date -u +'%Y%m%d-%H%M%S')" >> ${GITHUB_OUTPUT}
           echo "SHORT_SHA=${GITHUB_SHA::8}" >> ${GITHUB_OUTPUT}
 
       - name: Build and push image
