@@ -2,6 +2,5 @@ images:
   backend:
     env:
       SOME_VAR: staging_value
-      SOME_VAR_2: staging_value_2
       SOME_SECRET_VAR_7: ref+vault://kv/argo-cd/products/kargo-demo#important-secret
       SOME_SECRET_VAR_8: ref+vault://kv/argo-cd/products/kargo-demo#other-secret
