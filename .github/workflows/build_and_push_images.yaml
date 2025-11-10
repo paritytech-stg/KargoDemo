@@ -64,10 +64,11 @@ jobs:
           OWNER: '${{ github.repository_owner }}'
           REPOSITORY: '${{ github.event.repository.name }}'
 
-      - name: Generate date tag
+      - name: Generate vars
         id: date-tag
         run: |
-          echo "DATE_TAG=$(date -u +'%Y%m%d%H%M%S')" >> ${GITHUB_OUTPUT}
+          echo "DATE_TAG=$(date -u +'%Y%m%d%-H%M%S')" >> ${GITHUB_OUTPUT}
+          echo "SHORT_SHA=${GITHUB_SHA::8}" >> ${GITHUB_OUTPUT}
 
       - name: Build and push image
         uses: docker/build-push-action@v5
@@ -77,5 +78,5 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:${{ github.sha }}
-            ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:${{ steps.date-tag.outputs.DATE_TAG }}
+            ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:${{ steps.date-tag.outputs.DATE_TAG }}-${{ github.event_name == 'push' && steps.date-tag.outputs.SHORT_SHA || github.event.pull_request.number }}
             ghcr.io/${{ steps.set-lower.outputs.OWNER_LC }}/${{ steps.set-lower.outputs.REPOSITORY_LC }}/${{ matrix.image.name }}:latest
