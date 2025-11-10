@@ -3,6 +3,7 @@ images:
     dockerfile: KargoDemo/Dockerfile
     context: .
     port: 80
+    ingressRoute: /
   backend:
     dockerfile: KargoDemoServer/Dockerfile
     context: .
